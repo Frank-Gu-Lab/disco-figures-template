@@ -1,0 +1,5 @@
+# DISCO color style
+
+# Set color cycle
+axes.prop_cycle : cycler('color', ['377eb8', '984ea3', 'ff7f00', 'e41a1c', 'f781bf','ffff33','4daf4a','a65628','999999'])
+
