@@ -7,29 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# GRABBING FUNCTIONS FOR CREATING PLOT DFS
-def grab_polymer_name(full_filepath, common_filepath):
-    '''Grabs the polymer name from a file path.
-    
-    Parameters:
-    -----------
-    full_filepath: string
-        path to the datasheet for that polymer 
-
-    common_filepath: string 
-        portion of the filepath that is shared between all polymer inputs, excluding their custom names
-    
-    Returns:
-    -------
-    polymer_name: string
-        the custom portion of the filepath with the polymer name and any other custom info
-    '''
-
-    _, polymer_name = full_filepath.split(common_filepath)
-    polymer_name = polymer_name[:-5]  # remove the .xlsx
-
-    return polymer_name
-
+# DATA GRABBING FUNCTIONS
 def grab_peak_subset_data(df, ppi):
     '''Subsets a df to only the desired proton peak index.
 

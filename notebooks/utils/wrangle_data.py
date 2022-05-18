@@ -8,72 +8,8 @@ import pandas as pd
 import scipy.stats as stats
 from scipy.stats import t
 import pingouin as pg
-import re
 
-# RAW DATA MERGING AND PREPROCESSING FUNCTIONS
-def filepath_to_dfs(df_file_paths, polymer_names):
-    '''Reads df file path list, cleans and converts to list of dataframes, 
-    set schemas to be consistent according to desired columns.
-    
-    Parameters:
-    -----------
-    df_file_paths: list
-        list of filepaths to data
-
-    polymer_names: string
-        list of strings that correspond to the polymer names
-
-    Returns:
-    --------
-    df_list: list
-        list of dataframes containing polymer info
-    '''
-
-    df_list = []
-
-    for ix, file in enumerate(df_file_paths):
-
-        if "mean" in file and "all" not in file:
-            try:  # ppm in index
-                # clear default "unnamed" column names in multi index
-                df = pd.read_excel(file, header=[0, 1], index_col=[
-                                   0, 1, 2, 3]).iloc[:, :2]
-                df_other = pd.read_excel(file, header=[0, 1], index_col=[
-                    0, 1, 2, 3]).iloc[:, 2:].droplevel(1, axis=1)
-                df_other.columns = pd.MultiIndex.from_product(
-                    [df_other.columns, ['']])
-                clean_df = pd.merge(df, df_other, left_on=("concentration", "sat_time", "proton_peak_index", "ppm"), right_on=(
-                    "concentration", "sat_time", "proton_peak_index", "ppm"))
-
-            except KeyError:  # ppm in column
-
-                # clear default "unnamed" column names in multi index
-                df = pd.read_excel(file, header=[0, 1], index_col=[
-                                   0, 1, 2]).iloc[:, :4]
-                df_other = pd.read_excel(file, header=[0, 1], index_col=[
-                                         0, 1, 2]).iloc[:, 4:].droplevel(1, axis=1)
-                df_other.columns = pd.MultiIndex.from_product(
-                    [df_other.columns, ['']])
-                clean_df = pd.merge(df, df_other, left_on=("concentration", "sat_time", "proton_peak_index"), right_on=(
-                    "concentration", "sat_time", "proton_peak_index"))
-
-                # add ppm back to index
-                df_ppm = clean_df['ppm']['mean']  # grab mean ppm
-                clean_df = clean_df.drop(
-                    columns='ppm', level=0)  # drop extra vals
-                clean_df['ppm'] = df_ppm  # leave only mean ppm
-                clean_df.set_index('ppm', append=True, inplace=True)
-
-        elif "replicate" in file:
-            clean_df = pd.read_excel(file)
-
-        if "polymer_name" not in clean_df.columns:
-            clean_df['polymer_name'] = polymer_names[ix]
-
-        df_list.append(clean_df)
-
-    return df_list
-
+# DATA PREPROCESSING FUNCTIONS
 def flatten_multicolumns(mean_df):
     '''Takes in a mean df and flattens the multi-tier column
     index into a directly indexable index.'''
@@ -86,49 +22,6 @@ def flatten_multicolumns(mean_df):
     mean_df.columns = colnames
     
     return mean_df
-
-def numberline_etl(source_path):
-    '''Extracts PPM RANGE data and binding data (where available) from raw replicate tables in order to regerenate the numberline plot.
-    
-    Parameters:
-    ----------
-    source_path: string
-        filepath to all raw data files
-    
-    Returns:
-    -------
-    etl_df: Pandas.Dataframe
-        loaded dataframe of dataset required to generate the numberline plot'''
-
-    all_files = source_path
-    rep_files = [file for file in all_files if 'replicate' in file]
-
-    # grab only desired files and names of files to transform into dfs
-    final_list = []
-    final_poly_names = []
-
-    for file in rep_files:
-        if "all" in file:
-            poly_root = re.search(
-                'replicate_all_(.+?).xlsx', file).group(1).strip()
-        else:
-            poly_root = re.search('replicate_(.+?).xlsx',
-                                  file).group(1).strip()
-        final_list.append(file)
-        final_poly_names.append(poly_root)
-
-    # convert list of filepaths to one central df
-    # drop data that is not required for this plot
-    etl_df_list = filepath_to_dfs(final_list, final_poly_names)
-    etl_df = pd.concat(etl_df_list).drop(columns=['Unnamed: 0', "index", "sat_time", "yikj",
-                                                  "corr_%_attenuation", "SSE", "alpha", "beta"]).drop_duplicates().reset_index(drop=True)
-
-    # clean df
-    etl_df['AFo'] = etl_df['AFo'].fillna(0)
-    etl_df['polymer_name'] = etl_df['polymer_name'].apply(
-        lambda x: x.replace(" ", ""))
-
-    return etl_df
 
 # CALCULATE DISCO EFFECT PARAMS
 def calculate_abs_buildup_params(df):
@@ -205,7 +98,7 @@ def calculate_buildup_params(df):
 
     return sat_time, disco_effect, y1, y2
 
-# DELTA DISCO STAT TESTING, AND RESULTING DATA WRANGLING FUNCTIONS
+# CHANGE PROFILE DISCO EFFECT STAT TESTING, AND RESULTING DATA WRANGLING FUNCTIONS
 def shapiro_wilk(effect):
     '''
     H0: the data is normally distributed
