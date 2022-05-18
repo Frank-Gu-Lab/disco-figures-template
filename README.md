@@ -57,7 +57,10 @@ This template is intended to be an all-in-one place to work on your publication 
 ---
 
 ## Project Setup:
-1) Fork repository, and clone to your machine OR [create from our template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
+1) Click the green "Use This Template" button at the top of the page, and set up your repo.
+<p align="center">
+<img src="data/external/template_button.png" width=25% height=25%>
+</p>
 
 2) In your desired Python environment, run `pip install -r requirements.txt` in Terminal to install prerequisite dependencies for this repository
 
