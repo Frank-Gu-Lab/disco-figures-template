@@ -57,7 +57,7 @@ This template is intended to be an all-in-one place to work on your publication 
 ---
 
 ## Project Setup:
-1) Click the green "Use This Template" button at the top of the page, and set up your repo.
+1) Click the green "Use This Template" button at the top of the page (if signed in to GitHub) and set up your repo. Alternatively, fork repo and clone to your machine.
 <p align="center">
 <img src="data/external/template_button.png" width=25% height=25%>
 </p>
