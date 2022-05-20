@@ -40,7 +40,7 @@ This template is intended to be an all-in-one place to work on your publication 
     ├── README.md          <- The top-level README for this project.
     ├── data
     │   ├── external       <- Any external files (images, etc) required for plotting
-    │   └── raw            <- Polymer-Specific DISCO NMR experiment result tables
+    │   └── raw            <- Polymer-specific DISCO NMR experiment result tables
     │
     ├── notebooks          <- Jupyter notebook(s) for constructing plots 
     │   └── utils          <- Utility functions that plot from result tables
@@ -57,7 +57,7 @@ This template is intended to be an all-in-one place to work on your publication 
 ---
 
 ## Project Setup:
-1) Click the green "Use This Template" button at the top of the page (if signed in to GitHub) and set up your repo. Alternatively, fork repo and clone to your machine.
+1) Click the green "Use This Template" button at the top of the page (if signed in to GitHub) and set up your repo. Alternatively, fork the repo and clone to your machine.
 <p align="center">
 <img src="data/external/template_button.png" width=25% height=25%>
 </p>
