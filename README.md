@@ -83,7 +83,7 @@ This template is intended to be an all-in-one place to work on your publication 
 For a comprehensive description of DISCO NMR and the scientific meaning behind resulting plots, we encourage you to read our related publications:
 * [1] J. Watchorn, D. Burns, S. Stuart, and F. X. Gu, “Investigating the Molecular Mechanism of Protein–Polymer Binding with Direct Saturation Compensated Nuclear Magnetic Resonance,” Biomacromolecules, vol. 23, no. 1, pp. 67–76, Jan. 2022. https://doi.org/10.1021/acs.biomac.1c00944
 
-* [2] <i>Watchorn, J.; Stuart, S.; Burns, D.; Gu, F. X. Mechanistic influence of polymer species, molecular weight, and functionalization on mucin-polymer binding interactions. ACS Appl. Polym. Mater. 2022. Accepted pending revisions.</i>. 
+* [2] J. Watchorn, S. Stuart, and F. X. Gu. "Mechanistic influence of polymer species, molecular weight, and functionalization on mucin-polymer binding interactions." ACS Appl. Polym. Mater. 2022. Accepted pending revisions. 
 
 ---
 
@@ -95,8 +95,8 @@ In this release, our raw data table inputs are the automatically-generated outpu
 ## DISCO Figures in Publications
 The following papers use code from DISCO Figures to automate plot generation:
 
-* <i>Watchorn, J.; Stuart, S.; Burns, D.; Gu, F. X. Mechanistic influence of polymer species, molecular weight, and functionalization on mucin-polymer binding interactions. ACS Appl. Polym. Mater. 2022. Accepted pending revisions.</i>.
-* <i>Stuart, S. An Interpretable Machine Learning Framework for Modelling Macromolecular Interaction Mechanisms with Nuclear Magnetic Resonance (MASc thesis). University of Toronto Biomedical Engineering. 2022.</i> 
+* J. Watchorn, S. Stuart, and F. X. Gu. "Mechanistic influence of polymer species, molecular weight, and functionalization on mucin-polymer binding interactions." ACS Appl. Polym. Mater. 2022. Accepted pending revisions. 
+* Stuart, S. "An Interpretable Machine Learning Framework for Modelling Macromolecular Interaction Mechanisms with Nuclear Magnetic Resonance." MASc thesis. University of Toronto Biomedical Engineering. 2022.
 
 If you use this plotting repo for your paper/thesis, feel free to submit a PR to add it to the list!
 
